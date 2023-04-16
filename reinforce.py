@@ -2,8 +2,6 @@ import gymnasium as gym
 import numpy as np
 import random
 
-
-
 # 0: LEFT
 # 1: DOWN
 # 2: RIGHT
@@ -14,9 +12,10 @@ thetas = np.zeros((16, 4), dtype=float)
 pi = np.zeros((16, 4), dtype=float)
 NUMBER_OF_STATES = 16
 NUMBER_OF_ACTIONS = 4
-ALPHA = 0.1
+ALPHA = 0.5
 GAMMA = 0.1
-EPISODES = 100
+EPISODES = 1000
+Returns = []
 
 def getReward(observation):
     if 0 <= observation <= 12:
@@ -24,8 +23,7 @@ def getReward(observation):
     if observation == 13 or observation == 14:
         return -100
     if observation == 15:
-        return 10
-
+        return 1000
 def findDiscountedReturn(traj, t, T):
     G = 0
     for i in range(t, T):
@@ -53,10 +51,16 @@ def update(traj):
         # print(G)
         score = actionToVector(action)-pi[state]
         thetas[state] = thetas[state] + ALPHA*score*G
+        print(thetas[state])
         updatePI(state)
 
 def policy(state):
-    return random.choice(random.choices([[0], [1], [2], [3]], weights = list(pi[state]), k = 100))
+    return random.choice(random.choices([[0], [1], [2], [3]], weights = list(pi[state]), k = 1000))
+
+def fillPI():
+    for i in range(NUMBER_OF_STATES):
+        updatePI(i)
+fillPI()
 
 for episodes in range(EPISODES):
     env.reset()
@@ -67,6 +71,7 @@ for episodes in range(EPISODES):
 
     for timestamp in range(100):
         action = policy(state)
+        # print(action)
         action = env.action_space.sample()
         new_state, reward, terminated, truncated, info = env.step(action)
         reward = getReward(new_state)
@@ -76,8 +81,25 @@ for episodes in range(EPISODES):
         # print("Reward: {:.2f}".format(reward))
         if terminated or truncated:
             break
-
+    Returns.append(findDiscountedReturn(traj, 0, len(traj)))
+    print(traj)
     update(traj)
 
 print(thetas)
 print(pi)
+#display result
+env = gym.make("FrozenLake-v1", desc=["FFFF", "FFFF","FFFF", "SHHG"], render_mode="human", is_slippery=False)
+for episodes in range(5):
+    env.reset()
+    for timestamp in range(100):
+        action = policy(state)
+        action = env.action_space.sample()
+        new_state, reward, terminated, truncated, info = env.step(action)
+        env.render()
+        state = new_state
+        # print("Reward: {:.2f}".format(reward))
+        if terminated or truncated:
+            break
+
+import matplotlib as plt
+
