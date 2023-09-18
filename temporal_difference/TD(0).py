@@ -1,0 +1,86 @@
+import gymnasium as gym
+from pprint import pprint
+import random
+from REINFORCE.environments.frozen_lake_custom import FrozenLakeCustomEnv
+
+class TDAgent():
+    #assumes spaces.discrete for actiona and observation space
+    def __init__(self, env):
+        self.gamma = 1
+        self.alpha = 0.1
+        self.epsilon = 0.1
+        self.actionSize = env.action_space.n
+        self.obsSize = env.observation_space.n    
+        self.env = env 
+
+        self.actionProbs = {s: {a: 1/self.actionSize for a in range(self.actionSize)} for s in range(self.obsSize)}
+        self.Qtable = {s: {a: 0 for a in range(self.actionSize)} for s in range(self.obsSize)}
+        self.counts = {s: {a: 0 for a in range(self.actionSize)} for s in range(self.obsSize)}
+
+        for state in self.actionProbs:
+            self.improve_policy(state)
+
+    class myenv():
+        def __init__(self, env):
+            super.__init__()
+            self. render_mode = None  
+
+    def train_policy(self, episodes):
+        for i in range(episodes):
+            print("training", ((i+1)/episodes)*100, "%")
+            returns = 0
+            self.env.reset()
+            state = self.env.reset()[0]
+            action = self.policy(state)
+            while True:
+                nextState, reward, terminated, truncated, info = self.env.step(action)
+                nextAction = self.policy(nextState)
+                self.Qtable[state][action] += self.alpha*(reward + self.gamma*self.Qtable[nextState][nextAction]-self.Qtable[state][action] )
+                self.improve_policy(state)
+                state = nextState
+                action = nextAction
+                if terminated or truncated:
+                    break
+
+    def policy(self, state):
+        return random.choices(range(len(self.actionProbs[state])), self.actionProbs[state])[0]
+    
+    def deterministicPolicy(self, state):
+        return self.highest_key(self.actionProbs[state])
+
+    def improve_policy(self, state):
+        best_policy = self.highest_key(self.Qtable[state])
+        for action in self.actionProbs[state]:
+            if action == best_policy:
+                self.actionProbs[state][action] = 1-(self.epsilon*(self.actionSize-1)) 
+            else: 
+                self.actionProbs[state][action] = self.epsilon
+
+    @staticmethod
+    def highest_key(dict):
+        max_value = max(dict.values())        
+        max_keys = [key for key, value in dict.items() if value == max_value]
+        return random.choice(max_keys) #"ties broken arbitrarily"
+    
+def test(env, agent, num):
+    for i in range(num):
+        state = env.reset()[0]
+        while True:
+            action = agent.deterministicPolicy(state) 
+            next_state, reward, terminated, truncated, info = env.step(action)
+            state = next_state
+            if terminated or truncated:
+                break
+    env.close()
+        
+
+if __name__ == '__main__':
+
+    trainEnv = gym.make('FrozenLake-v1',map_name = '4x4', render_mode = 'ansi', is_slippery=False)
+    # trainEnv = FrozenLakeCustomEnv(map_name='4x4', is_slippery=False)
+
+    TDAgent = TDAgent(trainEnv)
+    TDAgent.train_policy(5000)
+
+    testEnv = gym.make('FrozenLake-v1',map_name = '4x4', render_mode = 'human', is_slippery=False)
+    test(testEnv, TDAgent, 10)

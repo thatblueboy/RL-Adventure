@@ -101,8 +101,6 @@ for episodes in range(EPISODES):
 
 
 # DISPLAY RESULT
-
-
 print(thetas)
 print(pi)
 #display result
