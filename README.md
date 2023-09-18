@@ -1,11 +1,35 @@
-# REINFORCE/VPG
+# Reinforcement Learning Algorithms
 
-In this repository, a discrete vanilla policy gradient algorithm written from scratch using numpy has been applied to Open AI Gym's Frozen Lake Environment.
+Welcome to my repository of Reinforcement Learning (RL) implementations! This repository contains my implementations of various RL algorithms from scratch. A modified verision of FrozenLake has been used as environment to allow easy debugging and fast protoytyping. I've strived to make the code as readable and understandable as possible to facilitate learning and collaboration. Currently, the repository is a work in progress, and I will be adding more algorithms and environments in the future.
 
-Policy gradient methods are a type of reinforcement learning techniques that rely upon optimizing parametrized policies with respect to the expected return (long-term cumulative reward) by gradient descent
-Vanilla policy gradient also known as REINFORCE is the simplest form of policy gradient methods.
+## Algorithms Implemented
 
-Psuedo code can be found below:
+1. **Dynamic Programming (DP):**
+   - [Link to DP Implementation](dynamic_programming/)
+   <!-- - Description: DP applied using a determinstic policy to FrozenLake. -->
 
--![image](https://user-images.githubusercontent.com/100462736/232253856-12496865-9266-47f1-92da-953080f98b41.png)
+2. **Monte Carlo (MC):**
+   - [Link to MC Implementation](monte_carlo/)
+   <!-- - Description: Here, you'll find my implementation of Monte Carlo for solving FrozenLake. -->
 
+3. **Temporal Difference (TD):**
+   - [Link to TD Implementation](temporal_difference/)
+   <!-- - TD(0) has been implemented for FrozenLake. -->
+
+4. **Policy Gradient (PG):**
+   - [Link to PG Implementation](policy_gradients/)
+   <!-- - Currently only vanilla policy gradient (REINFORCE) has implemented. Working on making it more modular and adding more algorithms. -->
+
+## Repository Structure
+
+- Each algorithm has its dedicated folder (`dynamic_programming/`, `monte_carlo/`, `temporal_difference/`, `policy_gradients/`) containing code and related documentation.
+- Each folder contains `src/` for the source code, `/examples` for testing the code and `notes/` for documentation. `/examples` is under construction. Temporarily the implementations in `src/` are executables and can be used to train and test the algorithms.
+- `_environments/` contains a modified verion of farama-foundations's FrozenLake environment that allows for modifying the reward structure.
+- The code is designed to be readable and well-documented to aid in understanding and learning.
+
+<!-- ## Getting Started
+
+1. Clone this repository to your local machine:
+
+   ```bash
+   git clone https://github.com/yourusername/your-repo-name.git -->

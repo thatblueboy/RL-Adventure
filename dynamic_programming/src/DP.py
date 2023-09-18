@@ -1,6 +1,8 @@
 import gymnasium as gym
 import numpy as np
-from REINFORCE.environments.frozen_lake_custom import FrozenLakeCustomEnv
+import sys
+sys.path.append('/RL-Adventure/_environments')
+from frozen_lake_custom import FrozenLakeCustomEnv
 from copy import deepcopy
 from random import randrange
 from pprint import pprint
