@@ -1,7 +1,12 @@
-import gymnasium as gym
-from pprint import pprint
 import random
-from REINFORCE.environments.frozen_lake_custom import FrozenLakeCustomEnv
+import sys
+from pprint import pprint
+
+import gymnasium as gym
+
+sys.path.append('RL-Adventure/_environments')
+from frozen_lake_custom import FrozenLakeCustomEnv
+
 
 class MCAgent():
     #assumes spaces.discrete for actiona and observation space
@@ -23,7 +28,7 @@ class MCAgent():
     class myenv():
         def __init__(self, env):
             super.__init__()
-            self. render_mode = None  
+            self.render_mode = None  
 
     def train_policy(self, episodes):
         for i in range(episodes+1):

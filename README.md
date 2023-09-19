@@ -4,26 +4,22 @@ Welcome to my repository of Reinforcement Learning (RL) implementations! This re
 
 ## Algorithms Implemented
 
-1. **Dynamic Programming (DP):**
-   - [Link to DP Implementation](dynamic_programming/)
+1. [**Dynamic Programming (DP):**](dynamic_programming/)
    <!-- - Description: DP applied using a determinstic policy to FrozenLake. -->
 
-2. **Monte Carlo (MC):**
-   - [Link to MC Implementation](monte_carlo/)
-   <!-- - Description: Here, you'll find my implementation of Monte Carlo for solving FrozenLake. -->
+2. [**Monte Carlo (MC):**](monte_carlo/)
+   <!-- - Description: MC applied using a determinstic policy to FrozenLake. -->
 
-3. **Temporal Difference (TD):**
-   - [Link to TD Implementation](temporal_difference/)
-   <!-- - TD(0) has been implemented for FrozenLake. -->
+3. [**Temporal Difference (TD):**](temporal_difference/)
+   <!-- - Description: TD applied using a determinstic policy to FrozenLake. -->
 
-4. **Policy Gradient (PG):**
-   - [Link to PG Implementation](policy_gradients/)
-   <!-- - Currently only vanilla policy gradient (REINFORCE) has implemented. Working on making it more modular and adding more algorithms. -->
+4. [**Policy Gradients (PG):**](policy_gradients/)
+   <!-- - Description: PG applied using a determinstic policy to FrozenLake. -->
 
 ## Repository Structure
 
 - Each algorithm has its dedicated folder (`dynamic_programming/`, `monte_carlo/`, `temporal_difference/`, `policy_gradients/`) containing code and related documentation.
-- Each folder contains `src/` for the source code, `/examples` for testing the code and `notes/` for documentation. `/examples` is under construction. Temporarily the implementations in `src/` are executables and can be used to train and test the algorithms.
+- Each folder contains `src/` for the source code, `/notebooks` for testing the code and for documentation. `/notebooks` is under construction. Temporarily the files in `src/` can be ran directly to train and test the algorithms.
 - `_environments/` contains a modified verion of farama-foundations's FrozenLake environment that allows for modifying the reward structure.
 - The code is designed to be readable and well-documented to aid in understanding and learning.
 

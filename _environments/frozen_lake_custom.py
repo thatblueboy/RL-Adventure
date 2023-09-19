@@ -12,6 +12,11 @@ GOAL_REWARD = 10
 HOLE_REWARD = -5
 STEP_REWARD = -1
 
+def print_reward():
+    print("goal reward: ", GOAL_REWARD)
+    print("hole reward: ", HOLE_REWARD)
+    print("step reward: ", STEP_REWARD)
+
 
 
 
@@ -115,6 +120,11 @@ class FrozenLakeCustomEnv(FrozenLakeEnv):
         self.elf_images = None
         self.goal_img = None
         self.start_img = None
+
+    def print_reward(self):
+        print("goal reward: ", GOAL_REWARD)
+        print("hole reward: ", HOLE_REWARD)
+        print("step reward: ", STEP_REWARD)
 
     @staticmethod
     def getReward(newletter):

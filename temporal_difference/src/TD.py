@@ -1,7 +1,10 @@
 import gymnasium as gym
 from pprint import pprint
 import random
-from REINFORCE.environments.frozen_lake_custom import FrozenLakeCustomEnv
+
+import sys
+sys.path.append('RL-Adventure/_environments')
+from frozen_lake_custom import FrozenLakeCustomEnv
 
 class TDAgent():
     #assumes spaces.discrete for actiona and observation space

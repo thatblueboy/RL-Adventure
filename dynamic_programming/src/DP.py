@@ -1,18 +1,38 @@
 import gymnasium as gym
 import numpy as np
 import sys
-sys.path.append('/RL-Adventure/_environments')
-from frozen_lake_custom import FrozenLakeCustomEnv
 from copy import deepcopy
 from random import randrange
 from pprint import pprint
 
+# import _environments.frozen_lake_custom as flc
+# from ...environments.frozen_lake_custom import FrozenLakeCustomEnv
+
+sys.path.append('environments')
+from frozen_lake_custom import FrozenLakeCustomEnv
+
+
+
 class DPAgent():
-    
+
     def __init__(self, env, deterministic = True):
         self.determistic = deterministic
         self.GAMMA = 1
 
+        self.transitionTable = deepcopy(env.P)
+        self.deterministicPolicy = deepcopy(env.P)
+        self.stateValueTable = deepcopy(env.P)
+
+        #emptying copies to initialize policy and value function table
+        for state in self.deterministicPolicy:
+            for action in self.deterministicPolicy[state]:
+                self.deterministicPolicy[state][action] = 0
+            self.deterministicPolicy[state][randrange(4)] = 1 
+
+        for state in self.stateValueTable:
+            self.stateValueTable[state] = randrange(10)
+
+    def reset(self):
         self.transitionTable = deepcopy(env.P)
         self.deterministicPolicy = deepcopy(env.P)
         self.stateValueTable = deepcopy(env.P)
@@ -86,6 +106,11 @@ def test(env, agent):
                     break
 
 if __name__ == '__main__':
+    # print(sys.path)
+    # sys.path.append('RL/RL-Adventure/_environments')
+    # print(sys.path)
+    # import frozen_lake_custom
+
     env = FrozenLakeCustomEnv(map_name='4x4', is_slippery=False, render_mode='human')
     # env = gym.make('FrozenLake-v1', render_mode = 'human')
     DPAgent = DPAgent(env)

@@ -1,7 +1,11 @@
-from REINFORCE.environments.frozen_lake_custom import FrozenLakeCustomEnv
+# from REINFORCE.environments.frozen_lake_custom import FrozenLakeCustomEnv
+
 import random 
 import numpy as np
 
+import sys
+sys.path.append('RL-Adventure/_environments')
+from frozen_lake_custom import FrozenLakeCustomEnv
 
 class VPGAgent():
     def __init__(self, env):

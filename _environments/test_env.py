@@ -1,4 +1,4 @@
-from REINFORCE.environments.frozen_lake_custom import FrozenLakeCustomEnv
+from _environments.frozen_lake_custom import FrozenLakeCustomEnv
 
 env = FrozenLakeCustomEnv(desc=None,map_name='4x4', is_slippery=False, render_mode='human')
 
