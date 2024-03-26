@@ -2,6 +2,8 @@
 
 Welcome to my repository of Reinforcement Learning (RL) implementations! This repository contains my implementations of various RL algorithms from scratch. A modified verision of FrozenLake has been used as environment to allow easy debugging and fast protoytyping. I've strived to make the code as readable and understandable as possible to facilitate learning and collaboration. Currently, the repository is a work in progress, and I will be adding more algorithms and environments in the future.
 
+<img src="https://github.com/thatblueboy/RL-Adventure/assets/100462736/63b0341b-cb8a-41d0-ad53-3a84d91671f1" width="45%"></img> 
+
 ## Algorithms Implemented
 
 1. [**Dynamic Programming (DP):**](dynamic_programming/)
